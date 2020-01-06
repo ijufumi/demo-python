@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: docker-stop-test
+spec:
+  containers:
+  - name: docker-stop-test
+    image: docker-stop-test
+    imagePullPolicy: IfNotPresent
+    lifecycle:
+      preStop:
+        exec:
+          command: ["/bin/sleep","20"]
+  terminationGracePeriodSeconds: 60
