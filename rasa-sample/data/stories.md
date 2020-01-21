@@ -29,3 +29,17 @@
 ## bot challenge
 * bot_challenge
   - utter_iamabot
+
+## hello world
+* hello_world
+  - action_hello_world
+
+## ask color
+* ask_color
+  - utter_ask_color
+
+## custom buttons
+* custom_button
+  - action_custom_button
+* json_message
+  - action_json_message

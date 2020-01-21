@@ -54,3 +54,12 @@
 - are you a human?
 - am I talking to a bot?
 - am I talking to a human?
+
+## intent:hello_world
+- hello world
+
+## intent:ask_color
+- color is
+
+## intent:custom_button
+- buttons

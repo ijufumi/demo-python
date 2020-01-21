@@ -9,6 +9,9 @@ intents:
 - mood_great
 - mood_unhappy
 - bot_challenge
+- hello_world
+- ask_color
+- custom_button
 templates:
   utter_greet:
   - text: Hey! How are you?
@@ -23,6 +26,13 @@ templates:
   - text: Bye
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
+  utter_ask_color:
+  - text: "what color would you like?"
+    buttons:
+      - title: "blue"
+        payload: '/choose{"color": "blue"}'
+      - title: "red"
+        payload: '/choose{"color": "red"}'
 actions:
 - utter_greet
 - utter_cheer_up
@@ -30,3 +40,7 @@ actions:
 - utter_happy
 - utter_goodbye
 - utter_iamabot
+- action_hello_world
+- utter_ask_color
+- action_custom_button
+- action_json_message
