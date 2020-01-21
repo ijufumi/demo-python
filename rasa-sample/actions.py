@@ -1,3 +1,4 @@
+import re
 from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
@@ -63,6 +64,54 @@ class ActionJsonMessage(Action):
                 "key1": "value1",
                 "key2": "value2",
             }}
-)
+        )
+
+        return []
+
+
+class ActionConversation(Action):
+    def name(self) -> Text:
+        return "action_conversation"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        state = tracker.current_state()
+        print("current_state: {}".format(state))
+
+        input_text = state['latest_message'].get('text')
+        latest_bot = None
+        for event in reversed(state['events']):
+            if event['event'] == 'bot':
+                data = event.get('data', {}).get('custom', {}).get('data', [])
+                latest_bot = data[0] if len(data) > 0 else None
+                break
+
+        print("latest_bot: {}".format(latest_bot))
+        if not latest_bot:
+            print("use utter_conversation_1")
+            dispatcher.utter_message(template="utter_conversation_1", json_message={"data": ["conversation_1"]})
+        else:
+            if latest_bot == 'conversation_1':
+                print("use utter_conversation_2")
+                dispatcher.utter_message(template="utter_conversation_2", json_message={"data": ["conversation_2"]})
+            elif latest_bot == 'conversation_2':
+                result = re.match("\\d+", input_text)
+                if result:
+                    print("use utter_conversation_3")
+                    dispatcher.utter_message(template="utter_conversation_3", json_message={"data": ["conversation_3"]})
+                else:
+                    print("use utter_conversation_2")
+                    dispatcher.utter_message(template="utter_conversation_2", json_message={"data": ["conversation_2"]})
+            elif latest_bot == 'conversation_3':
+                result = re.match("\\d+", input_text)
+                if not result:
+                    print("use utter_conversation_3")
+                    dispatcher.utter_message(template="utter_conversation_3", json_message={"data": ["conversation_3"]})
+                else:
+                    dispatcher.utter_message(text="Bye", json_message={"data": ["conversation_3"]})
+            else:
+                dispatcher.utter_message(text="Bye", json_message={"data": ["conversation_3"]})
 
         return []

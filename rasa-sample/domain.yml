@@ -2,45 +2,19 @@ session_config:
   session_expiration_time: 60.0
   carry_over_slots_to_new_session: true
 intents:
-- greet
-- goodbye
-- affirm
-- deny
-- mood_great
-- mood_unhappy
-- bot_challenge
-- hello_world
-- ask_color
-- custom_button
+- get_started
+- conversation_2
+- conversation_3
 templates:
-  utter_greet:
-  - text: Hey! How are you?
-  utter_cheer_up:
-  - text: 'Here is something to cheer you up:'
-    image: https://i.imgur.com/nGF1K8f.jpg
-  utter_did_that_help:
-  - text: Did that help you?
-  utter_happy:
-  - text: Great, carry on!
-  utter_goodbye:
-  - text: Bye
-  utter_iamabot:
-  - text: I am a bot, powered by Rasa.
-  utter_ask_color:
-  - text: "what color would you like?"
-    buttons:
-      - title: "blue"
-        payload: '/choose{"color": "blue"}'
-      - title: "red"
-        payload: '/choose{"color": "red"}'
+  utter_conversation_1:
+    - text: Please fill out details. [yahoo](http://www.yahoo.co.jp)
+  utter_conversation_2:
+    - text: Please number
+  utter_conversation_2_1:
+    - text: Please number!!
+  utter_conversation_3:
+    - text: Please number(part 2)
+  utter_conversation_3_1:
+    - text: Please number!!(part 2)
 actions:
-- utter_greet
-- utter_cheer_up
-- utter_did_that_help
-- utter_happy
-- utter_goodbye
-- utter_iamabot
-- action_hello_world
-- utter_ask_color
-- action_custom_button
-- action_json_message
+- action_conversation
