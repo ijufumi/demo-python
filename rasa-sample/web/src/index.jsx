@@ -10,7 +10,9 @@ ReactDOM.render(
         socketPath={"/socket.io/"}
         customData={{"language": "en"}}
         title={"Title"}
-        customComponent={(messageData) => (<div>Custom React component</div>) }
+        customComponent={(messageData) => (
+            <div><div>{messageData.key1}</div><div>{messageData.key2}</div></div>
+        ) }
     />,
     document.querySelector('.container')
 );

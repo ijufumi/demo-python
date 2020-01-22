@@ -91,7 +91,8 @@ class ActionConversation(Action):
         print("latest_bot: {}".format(latest_bot))
         if not latest_bot:
             print("use utter_conversation_1")
-            dispatcher.utter_message(template="utter_conversation_1", json_message={"data": ["conversation_1"]})
+            dispatcher.utter_message(template="utter_conversation_1", json_message={"data": {"key1": "value1",
+                                                                                             "key2": "value2"}})
         else:
             if latest_bot == 'conversation_1':
                 print("use utter_conversation_2")
