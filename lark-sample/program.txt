@@ -1,0 +1,14 @@
+set a = $message contains ("abc", "abcd")
+set b = $message contains ("abe")
+set c = $message contains ("abd", "abef", "abs")
+
+if (c) {
+  return "c"
+} else {
+  if ((b or c or a)) {
+    return "b"
+  }
+}
+
+return "a"
+
