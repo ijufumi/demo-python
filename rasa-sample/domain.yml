@@ -2,19 +2,7 @@ session_config:
   session_expiration_time: 60.0
   carry_over_slots_to_new_session: true
 intents:
-- get_started
-- conversation_2
-- conversation_3
-templates:
-  utter_conversation_1:
-    - text: Please fill out details. [yahoo](http://www.yahoo.co.jp)
-  utter_conversation_2:
-    - text: Please number
-  utter_conversation_2_1:
-    - text: Please number!!
-  utter_conversation_3:
-    - text: Please number(part 2)
-  utter_conversation_3_1:
-    - text: Please number!!(part 2)
+  - get_started
+  - conversation_1
 actions:
-- action_conversation
+  - action_conversation2

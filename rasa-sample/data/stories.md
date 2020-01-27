@@ -1,7 +1,5 @@
-## happy path
+## conversations
 * get_started
-  - action_conversation
-* conversation_2
-  - action_conversation
-* conversation_3
-  - action_conversation
+  - action_conversation2
+* conversation_1
+  - action_conversation2

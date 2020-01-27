@@ -1,0 +1,8 @@
+set a = $message contains ("okinawa")
+
+if (a) {
+  return "How long lived in okinawa?"
+}
+
+return ""
+

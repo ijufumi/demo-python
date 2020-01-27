@@ -1,0 +1,34 @@
+?program: [(state)+]
+
+// statement
+?state: expr
+      | if_state
+      | if_else_state
+      | set_state
+      | return_state
+set_state: "set" symbol "=" expr
+return_state: "return" escaped_value
+if_state: "if" "(" expr ")" "{" program "}"
+if_else_state: "if" "(" expr ")" "{" program "}" "else" "{" program "}"
+
+// expression
+?expr: fact
+     | contains_expression
+     | or_expression
+     | not_expression
+contains_expression: reserved_symbol "contains" "(" escaped_value ["," escaped_value]* ")"
+or_expression: "(" symbol "or" symbol ["or" symbol]* ")"
+not_expression: "not" "(" expr ")"
+
+?fact: symbol
+
+symbol: WORD
+reserved_symbol: "$" symbol
+
+escaped_value: ESCAPED_STRING
+
+%import common.WORD
+%import common.SIGNED_NUMBER
+%import common.WS
+%import common.ESCAPED_STRING
+%ignore WS

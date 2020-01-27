@@ -3,6 +3,9 @@ from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import SlotSet
+
+import lark_module
 
 
 class ActionHelloWorld(Action):
@@ -114,5 +117,34 @@ class ActionConversation(Action):
                     dispatcher.utter_message(text="Bye", json_message={"data": ["conversation_3"]})
             else:
                 dispatcher.utter_message(text="Bye", json_message={"data": ["conversation_3"]})
+
+        return []
+
+
+class ActionConversation2(Action):
+    action_state = {}
+
+    def name(self) -> Text:
+        return "action_conversation2"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        state = tracker.current_state()
+        sender_id = state.get("sender_id")
+        current_action = self.action_state.get(sender_id)
+        input_text = state['latest_message'].get('text')
+        print("state: {}, current_action: {}".format(state, current_action))
+        if current_action:
+            result = lark_module.execute(input_text)
+            if result:
+                dispatcher.utter_message(text=result, json_message={"data": ["step2"]},
+                                         elements=[{"data": ["step2"]}])
+            else:
+                dispatcher.utter_message(text="Bye", json_message={"data": ["step3"]})
+        else:
+            dispatcher.utter_message(text="Where are you from ?", json_message={"data": ["step3"]})
+            self.action_state[sender_id] = "get_start"
 
         return []
