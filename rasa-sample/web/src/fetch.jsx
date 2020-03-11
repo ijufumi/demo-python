@@ -12,6 +12,9 @@ class FetchTest extends React.Component {
         const result = await fetch(hostTest + "/api/admin/v1/login", {
             credentials: "same-origin",
             method: "post",
+            headers: {
+                "Authorization": "aaaa"
+            },
             body: JSON.stringify(params)
         })
             .then(response => {
